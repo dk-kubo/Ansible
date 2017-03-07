@@ -1,0 +1,7 @@
+[cisco]
+10.0.0.2
+
+[cisco:vars]
+enable_secret=nos
+user=nos
+password=nos

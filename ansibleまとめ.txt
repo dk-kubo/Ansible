@@ -1,0 +1,22 @@
+[GNS3]
+/cloud/tap
+
+interface
+/dev/tap0
+
+起動時
+sudo /Application/GNS3.app/Contents/MacOS/gns3
+
+sudo ifconfig tap0 10.0.0.1/24 up
+
+
+
+[ansible実行コマンド]
+ansible-playbook -i hosts ios_show-run.yml
+
+[ルーターの方でsshの設定を有効化]
+crypto key generate rsa
+1024
+
+line vty 0 4
+	transport input ssh

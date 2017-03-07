@@ -1,0 +1,30 @@
+---
+- hosts: cisco
+  gather_facts: no
+  tasks:
+   - name: sh run by cisco ios_command module
+     local_action:
+       module:   ios_command
+       commands:
+         - show clock
+         - show run
+         - show int sum
+       << : &IOS_INFO
+         host:     "{{ inventory_hostname }}"
+         username: "{{ user }}"
+         password: "{{ password }}"
+         authorize: true
+         auth_pass: "{{ enable_secret }}"
+     register: result
+   - debug: var=result.stdout_lines
+
+   - name: log write out
+     local_action: template src=./conf.j2 dest=./{{ inventory_hostname }}.log
+
+   - name: parse config
+     local_action: shell cat {{ inventory_hostname }}.log | sed -e 's/        \"//g' | sed -e 's/",//g' | sed -e "1,2d" | sed -e '$d' | sed -e '$d' > {{ inventory_hostname }}.txt
+
+   - name: remove logfile
+     local_action: file path=./{{ inventory_hostname }}.log state=absent
+
+

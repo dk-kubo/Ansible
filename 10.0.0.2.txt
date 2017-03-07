@@ -1,0 +1,107 @@
+*15:19:00.103 UTC Wed Mar 1 2017"
+    ], 
+    [
+Building configuration... 
+ 
+Current configuration : 871 bytes 
+! 
+version 12.4 
+service timestamps debug datetime msec 
+service timestamps log datetime msec 
+no service password-encryption 
+! 
+hostname R1 
+! 
+boot-start-marker 
+boot-end-marker 
+! 
+enable password ******** 
+! 
+no aaa new-model 
+no ip icmp rate-limit unreachable 
+! 
+! 
+ip cef 
+no ip domain lookup 
+ip domain name ********.com 
+! 
+! 
+! 
+! 
+! 
+! 
+! 
+! 
+! 
+! 
+! 
+! 
+! 
+! 
+! 
+! 
+username ******** secret 5 $1$IK9N$cBsG8XrfNi8JmtmwXZ71i1 
+! 
+! 
+ip tcp synwait-time 5 
+ip ssh version 2 
+!  
+! 
+! 
+! 
+! 
+interface FastEthernet0/0 
+ ip address 10.0.0.2 255.255.255.0 
+ duplex half 
+! 
+! 
+no ip http server 
+no ip http secure-server 
+! 
+! 
+no cdp log mismatch duplex 
+! 
+! 
+! 
+! 
+control-plane 
+! 
+! 
+! 
+! 
+! 
+! 
+gatekeeper 
+ shutdown 
+! 
+! 
+line con 0 
+ exec-timeout 0 0 
+ privilege level 15 
+ logging synchronous 
+ stopbits 1 
+line aux 0 
+ exec-timeout 0 0 
+ privilege level 15 
+ logging synchronous 
+ stopbits 1 
+line vty 0 4 
+ login local 
+ transport input ssh 
+! 
+! 
+end 
+"
+    ], 
+    [
+ 
+ *: interface is up 
+ IHQ: pkts in input hold queue     IQD: pkts dropped from input queue 
+ OHQ: pkts in output hold queue    OQD: pkts dropped from output queue 
+ RXBS: rx rate (bits/sec)          RXPS: rx rate (pkts/sec) 
+ TXBS: tx rate (bits/sec)          TXPS: tx rate (pkts/sec) 
+ TRTL: throttle count 
+ 
+  Interface              IHQ   IQD  OHQ   OQD  RXBS RXPS  TXBS TXPS TRTL 
+------------------------------------------------------------------------ 
+* FastEthernet0/0         13     0    0     0  1000    1     0    0    0"
